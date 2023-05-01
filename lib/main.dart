@@ -19,7 +19,7 @@ void main() async {
       "pk_live_51Ha7ksFqvNa68R4aELbp4FEzIubfoBRFInwUSMLEnfQBiqgjMp3KIoJOwpo4nXofLMKKgnOmykVkaIN1JRQ5VTY900QSl0vA43";
 
   //Load our .env file that contains our Stripe Secret key
-  await dotenv.load(fileName: "assets/.env");
+  // await dotenv.load(fileName: "assets/.env");
 
   runApp(MyApp());
   configLoading();

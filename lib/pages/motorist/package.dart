@@ -1395,7 +1395,8 @@ Future<void> _packageOneDetails() async {
       var response = await http.post(
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         headers: {
-          'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET']}',
+          // 'Authorization': 'Bearer ${dotenv.env['STRIPE_SECRET']}',
+          'Authorization': 'Bearer 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',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: body,
