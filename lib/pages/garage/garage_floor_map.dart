@@ -205,10 +205,23 @@ class _GarageFloorMapGarageState extends State<GarageFloorMapGarage> with Ticker
 
   late AnimationController animation;
   late Animation<double> _fadeInFadeOut;
+
+  final viewTransformationController = TransformationController();
   
   @override
   void initState() {
     // TODO: implement initState
+
+    //////// Start Zoom Control //////
+    final zoomFactor = 1.1;
+    final xTranslate = 300.0;
+    final yTranslate = 300.0;
+    viewTransformationController.value.setEntry(1, 1, zoomFactor);
+    viewTransformationController.value.setEntry(2, 2, zoomFactor);
+    // viewTransformationController.value.setEntry(1, 2, -xTranslate);
+    // viewTransformationController.value.setEntry(1, 3, -yTranslate);
+    //////// End Zoom Control //////
+
     super.initState();
     
     getUserData().whenComplete(()async{
@@ -372,8 +385,114 @@ class _GarageFloorMapGarageState extends State<GarageFloorMapGarage> with Ticker
                       Center(child: Text("Garage : ${widget.garage_id}, Floor : ${widget.floor_no}", style: TextStyle(fontSize: 15),)),
                       Container(
                         padding: EdgeInsets.all(20),
-                        child: Column(
+                        child: 
+                          /*InteractiveViewer(
+                          boundaryMargin: const EdgeInsets.all(20.0),
+                          minScale: 0.1,
+                          maxScale: 1.6,
+                          child: Container(
+                            width: double.infinity,
+                            height: 300,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: <Color>[Colors.orange, Colors.red],
+                                stops: <double>[0.0, 1.0],
+                              ),
+                            ),
+                            child: Text('data'),
+                          )
+                        )*/
+                        
+                        Column(
                           children: [
+                            InteractiveViewer(
+                              transformationController: viewTransformationController,
+                              clipBehavior: Clip.none,
+                              minScale: 0.1,
+                              maxScale: 6,
+                              child: 
+                              /*Container(
+                                width: double.infinity,
+                                height: 300,
+                                color: Colors.blue,
+                                child: Center(
+                                  child: Text('data'),
+                                ),
+                              )*/
+                              /*Stack(
+                                children: [
+                                  Container(
+                                    width: double.infinity,
+                                    height: 300,
+                                    color: Colors.blue,
+                                    child: Center(
+                                      child: Text('data'),
+                                    ),
+                                  )
+                                ],
+                              )*/
+                              Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  map_image == null ? Text("") :
+                                  FadeInImage.assetNetwork(
+                                    placeholder: "assets/animations/image-thumbnail.gif",
+                                    image: "https://creativeparkingsolutions.com/public/assets/admin/images/map_images/${map_image}",
+                                    width: 300,
+                                    height: 200,
+                                    fit: BoxFit.fill,
+                                    fadeInDuration: Duration(milliseconds: 5),
+                                    fadeOutDuration: Duration(milliseconds: 5),
+                                    imageErrorBuilder: (context, error, stackTrace){
+                                      return Image.asset("assets/images/image-thumbnail.jpg", width: 300, height: 200, fit: BoxFit.fill,);
+                                    },
+                                  ),
+                                  Container(
+                                    height: 200,
+                                    width: 300,
+                                    child: CustomPaint(
+                                      painter: RectPainter(floorMap, context),
+                                    ),
+                                  ),
+                                  map_image == null ? Text("") :
+                                  Positioned(
+                                    top: 0,
+                                    right: 0,
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: 3, bottom: 3, left: 5, right: 5),
+                                      child: FadeTransition(
+                                        opacity: _fadeInFadeOut,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            ClipOval(
+                                              child: Container(
+                                                height: 10,
+                                                width: 10,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                            SizedBox(width: 2,),
+                                            Text("Live", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),)
+                                          ],
+                                        ),
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    )
+                                  )
+                                  
+                                ],
+                              ),
+
+                            )
+                            /*
                             Stack(
                               clipBehavior: Clip.none,
                               children: [
@@ -431,9 +550,10 @@ class _GarageFloorMapGarageState extends State<GarageFloorMapGarage> with Ticker
                                 
                               ],
                             ),
-                            
+                            */
                           ],
                         ),
+                        
                       )
                     ]
                   )
@@ -517,10 +637,16 @@ class RectPainter extends CustomPainter {
     floorMap.forEach((element) {
       // print("pos_x : ${element.pos_x}, pos_y : ${element.pos_y}, height : ${element.height}, width : ${element.width}, isPark : ${element.isPark}");
 
-      double left = double.parse(element.pos_x) * 0.156;
-      double top = double.parse(element.pos_y) *0.18;
-      double width = double.parse(element.width) *0.17;
-      double height = double.parse(element.height) *0.2;
+      // double left = double.parse(element.pos_x) * 0.156;
+      // double top = double.parse(element.pos_y) *0.18;
+      // double width = double.parse(element.width) *0.17;
+      // double height = double.parse(element.height) *0.2;
+
+      double left = double.parse(element.pos_x) * 0.52;
+      double top = double.parse(element.pos_y) *0.5;
+      double width = double.parse(element.width) *0.5;
+      double height = double.parse(element.height) *0.5;
+
       var parking_no = element.parking_no;
       var status = element.status;
 
@@ -559,7 +685,7 @@ class RectPainter extends CustomPainter {
         textDirection: TextDirection.ltr
       );
 
-      var textPosition = Offset(left+(width/5), top+height/3);
+      var textPosition = Offset(left+(width/8), top+height/9);
       textPainter.layout(minWidth: 0, maxWidth: 50);
       textPainter.paint(canvas, textPosition);
 

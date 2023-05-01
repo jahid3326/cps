@@ -444,7 +444,7 @@ class _DashboardGarageState extends State<DashboardGarage> {
                                                   ),
                                                   Container(
                                                     padding: EdgeInsets.only(left: 13, right: 13, top: 7, bottom: 7),
-                                                    child: Icon(Icons.mail_outline_rounded, color: Colors.white, size: 30,),
+                                                    child: Icon(Icons.border_all_outlined, color: Colors.white, size: 30,),
                                                     decoration: BoxDecoration(
                                                       color: Colors.blue,
                                                       borderRadius: BorderRadius.circular(10)
@@ -494,7 +494,7 @@ class _DashboardGarageState extends State<DashboardGarage> {
                                                   ),
                                                   Container(
                                                     padding: EdgeInsets.only(left: 13, right: 13, top: 7, bottom: 7),
-                                                    child: Icon(Icons.mail_outline_rounded, color: Colors.white, size: 30,),
+                                                    child: Icon(Icons.auto_awesome_mosaic_outlined, color: Colors.white, size: 30,),
                                                     decoration: BoxDecoration(
                                                       color: Colors.blue,
                                                       borderRadius: BorderRadius.circular(10)
@@ -540,7 +540,7 @@ class _DashboardGarageState extends State<DashboardGarage> {
                                                   ),
                                                   Container(
                                                     padding: EdgeInsets.only(left: 13, right: 13, top: 7, bottom: 7),
-                                                    child: Icon(Icons.mail_outline_rounded, color: Colors.white, size: 30,),
+                                                    child: Icon(Icons.ballot_outlined, color: Colors.white, size: 30,),
                                                     decoration: BoxDecoration(
                                                       color: Colors.blue,
                                                       borderRadius: BorderRadius.circular(10)

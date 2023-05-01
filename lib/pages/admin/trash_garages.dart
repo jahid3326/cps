@@ -313,16 +313,16 @@ class _TrashGarageAdminState extends State<TrashGarageAdmin> {
                             ),
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('Garage ID')),
+                                label: Center(child: Text('Garage ID', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Garage Name')),
+                                label: Center(child: Text('Garage Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Status')),
+                                label: Center(child: Text('Status', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Action')),
+                                label: Center(child: Text('Action', style: TextStyle(color: Colors.white),)),
                               )
                             ],
                             rows: _filterGarages

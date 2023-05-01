@@ -10,6 +10,7 @@ import 'package:cps/pages/admin/sidebar_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:cps/pages/widgets/header_widget.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -88,6 +89,9 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
   }
 
   final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  File? _image;
+  final picker = ImagePicker();
 
   TextEditingController garage_id = TextEditingController();
   TextEditingController garage_name = TextEditingController();
@@ -97,9 +101,14 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
   TextEditingController width_of_parking_space = TextEditingController();
   TextEditingController comments = TextEditingController();
   TextEditingController upload_file = TextEditingController();
-  
-  
 
+  TextEditingController selectedTotalNoOfFloorsValue = TextEditingController();
+  TextEditingController selectedSpacePerFloorValue = TextEditingController();
+  TextEditingController selectedNoOfSpaceValue = TextEditingController();
+  TextEditingController selectedNoOfRowsValue = TextEditingController();
+  TextEditingController selectedNoOfColumnsValue = TextEditingController();
+  TextEditingController selectedGarageLayoutValue = TextEditingController();
+  
   double? lat;
   double? lng;
   String? location;
@@ -122,28 +131,29 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
 
   List _stateCityList = [];
 
-  var selectedClientValue = 'Choose Client';
-  var selectedTotalNoOfFloorsValue = 'Choose total number of floors';
-  var selectedSpacePerFloorValue = 'Choose space per floor';
-  var selectedNoOfSpaceValue = 'Choose total number of space';
-  var selectedNoOfRowsValue = 'Choose no of rows';
-  var selectedNoOfColumnsValue = 'Choose no of columns';
-  var selectedGarageLayoutValue = 'Choose garage layout';
+  String? selectedGarageOwnerValue;
+  String? selectedClientValue;
+  String? selectedPreferencesValue;
 
-  List _totalNoOfFloors = ['One', 'Two', 'Three', 'Four'];
-  List _spacePerFloors = ['One', 'Two', 'Three', 'Four'];
-  List _totalNoOfspace = ['One', 'Two', 'Three', 'Four'];
-  List _noOfRows = ['One', 'Two', 'Three', 'Four'];
-  List _noOfColumns = ['One', 'Two', 'Three', 'Four'];
-  List _garageLayout = ['One', 'Two', 'Three', 'Four'];
+  // FilePickerResult? result;
+  // String? _fileName;
+  // PlatformFile? pickedfile;
+  // File? filePath;
+  // String? fileData;
 
-  FilePickerResult? result;
-  String? _fileName;
-  PlatformFile? pickedfile;
-  File? filePath;
-  String? fileData;
+  Future pickFile() async{
 
-  void pickFile() async{
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+        upload_file.text = pickedFile.path.split('/').last;
+      } else {
+        print('No image selected.');
+      }
+    });
+
+    /*
     try {
       result = await FilePicker.platform.pickFiles(
         type: FileType.any,
@@ -166,13 +176,101 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
     } catch (e) {
       
     }
+    */
+
+    // final XFile? photo = await ImagePicker().pickImage(source: ImageSource.gallery);
+    // setState(() {
+    //   filePath = File(photo!.path);
+    //   _fileName = photo.path.split('/').last;
+    //   fileData = base64Encode(filePath!.readAsBytesSync());
+    //   upload_file.text = photo.path.split('/').last;
+    // });
   }
+
+  //////// Garage Owner Dropdown List ////////////
+  
+  
+  List _garage_owner_list = [''];
+
+  
+
+  Future<void> garageOwnerList() async {
+    var client = http.Client();
+    try {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+      };
+      // var res = await client.get(Uri.https('creativeparkingsolutions.com', 'admin/get_garage_owner_app'));
+      var res = await client.get(Uri.parse('https://creativeparkingsolutions.com/admin/get_garage_owner_app'), headers: headers);
+        
+      var list = jsonDecode(res.body);
+      // print(list);
+      setState(() {
+        _garage_owner_list = list;
+      });
+
+      // print(list);
+
+      //return 'Success';
+      
+    } catch (e) {
+      print(e);
+    }
+  }
+  /////// End Garage Owner Dropdown List /////////
 
   //////// Client Dropdown List ////////////
   
   
   List _client_list = [''];
+  Future<void> clientList() async {
+    var client = http.Client();
+    try {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+      };
+      // var res = await client.get(Uri.https('creativeparkingsolutions.com', 'admin/get_garage_owner_app'));
+      var res = await client.get(Uri.parse('https://creativeparkingsolutions.com/admin/get_client_app'), headers: headers);
+        
+      var list = jsonDecode(res.body);
+      // print(list);
+      setState(() {
+        _client_list = list;
+      });
 
+      // print(list);
+
+      //return 'Success';
+      
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  List _preferences_list = [''];
+  Future<void> preferencesList() async {
+    var client = http.Client();
+    try {
+      Map<String, String> headers = {
+        'Accept': 'application/json',
+      };
+      var res = await client.get(Uri.parse('https://creativeparkingsolutions.com/admin/get_preferences_app'), headers: headers);
+        
+      var list = jsonDecode(res.body);
+      // print(list);
+      setState(() {
+        _preferences_list = list;
+      });
+
+      // print(list);
+
+      //return 'Success';
+      
+    } catch (e) {
+      print(e);
+    }
+  }
+  /*
   Future<dynamic> clientList() async {
     var client = http.Client();
     try {
@@ -194,10 +292,73 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
       
     }
   }
+  */
   /////// End Client Dropdown List /////////
   
-  Future<void> add_garage_form_a()async{
-    
+  Future<void> add_garage_form_b(Map<String, String> body, String filepath)async{
+    _timer?.cancel();
+
+    EasyLoading.instance
+      ..loadingStyle = EasyLoadingStyle.light;
+
+    await EasyLoading.show(
+      maskType: EasyLoadingMaskType.black,
+      indicator: Lottie.asset("assets/animations/loading.json", width: 125, height: 75)
+    );
+
+    Map<String, String> headers = {
+      'Content-Type': 'multipart/form-data',
+    };
+
+    var uri = Uri.https('creativeparkingsolutions.com', 'admin/add_garage_form_b_app');
+
+    var request = http.MultipartRequest('POST', uri)
+      ..fields.addAll(body)
+      ..headers.addAll(headers)
+      ..files.add(await http.MultipartFile.fromPath('garage_image', filepath));
+
+    // var response = await request.send();
+    request.send().then((result) async {
+
+      http.Response.fromStream(result).then((response) {
+        print(response.statusCode);
+        var jsonData = jsonDecode(response.body);
+        print(jsonData);
+        
+        if(response.statusCode == 200){
+          if(jsonData['status'] == true){
+
+            EasyLoading.instance
+              ..loadingStyle = EasyLoadingStyle.custom
+              ..backgroundColor = Colors.green.shade200
+              ..indicatorColor = Colors.green.shade900
+              ..textColor = Colors.green.shade900;
+            EasyLoading.showSuccess('New garage added successfully');
+            EasyLoading.dismiss();
+          }else{
+            EasyLoading.instance
+              ..loadingStyle = EasyLoadingStyle.custom
+              ..backgroundColor = Colors.red.shade200
+              ..indicatorColor = Colors.red.shade900
+              ..textColor = Colors.red.shade900;
+            EasyLoading.showError('Add Failed!');
+            EasyLoading.dismiss();
+          }
+        }
+      });
+    }).catchError((err){
+
+      EasyLoading.instance
+        ..loadingStyle = EasyLoadingStyle.custom
+        ..backgroundColor = Colors.red.shade200
+        ..indicatorColor = Colors.red.shade900
+        ..textColor = Colors.red.shade900;
+      EasyLoading.showError('Add Failed!');
+      EasyLoading.dismiss();
+      print('error: '+err.toString());
+    }).whenComplete(() => null);
+
+    /*
     var client = http.Client();
     try {
       _timer?.cancel();
@@ -209,34 +370,40 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
         maskType: EasyLoadingMaskType.black,
         indicator: Lottie.asset("assets/animations/loading.json", width: 125, height: 75)
       );
-
-      var res = await client.post(Uri.https('creativeparkingsolutions.com', 'public/add_garage_form_b_app.php'), body: {
-        'client_id' : selectedClientValue,
-        'garage_name' : garage_name.text,
-        'high_clearance' : high_clearance.text,
-        'floor_height' : floor_height.text,
-        'length_of_parking_space' : length_of_parking_space.text,
-        'width_of_parking_space' : width_of_parking_space.text,
-        'total_number_of_floor' : selectedTotalNoOfFloorsValue,
-        'space_per_floor' : selectedSpacePerFloorValue,
-        'total_number_of_space' : selectedNoOfSpaceValue,
-        'no_of_rows' : selectedNoOfRowsValue,
-        'no_of_columns' : selectedNoOfColumnsValue,
-        'garage_layout' : selectedGarageLayoutValue,
-        'comments' : comments.text,
-        'lat' : lat.toString(),
-        'lng' : lng.toString(),
-        'location' : location,
-        'file_name' : _fileName,
-        'file_data' : fileData,
-      });
-
+      
+      // var res = await client.post(Uri.https('creativeparkingsolutions.com', 'public/add_garage_form_b_app.php'), body: {
+        // 'client_id' : selectedClientValue,
+        // 'garage_name' : garage_name.text,
+        // 'high_clearance' : high_clearance.text,
+        // 'floor_height' : floor_height.text,
+        // 'length_of_parking_space' : length_of_parking_space.text,
+        // 'width_of_parking_space' : width_of_parking_space.text,
+        // 'total_number_of_floor' : selectedTotalNoOfFloorsValue,
+        // 'space_per_floor' : selectedSpacePerFloorValue,
+        // 'total_number_of_space' : selectedNoOfSpaceValue,
+        // 'no_of_rows' : selectedNoOfRowsValue,
+        // 'no_of_columns' : selectedNoOfColumnsValue,
+        // 'garage_layout' : selectedGarageLayoutValue,
+        // 'comments' : comments.text,
+        // 'lat' : lat.toString(),
+        // 'lng' : lng.toString(),
+        // 'location' : location,
+        // 'file_name' : _fileName,
+        // 'file_data' : fileData,
+      // });
+      // var res = await client.post(Uri.https('creativeparkingsolutions.com', 'public/add_garage_form_b_app.php'), body: {
+      //   'f':'/9j/4f98RXhpZgAASUkqAAgAAAATAAABBAABAAAAEAoAAAEBBAABAAAAjAcAAA4BAgAgAAAA8gAAAA8BAgAgAAAAEgEAABABAgAgAAAAMgEAABIBAwABAAAABgAAABoBBQABAAAAUgEAABsBBQABAAAAWgEAACgBAwABAAAAAgAAADEBAgAgAAAAYgEAADIBAgAUAAAAggEAABMCAwABAAAAAgAAACACBAABAAAAAAAAACECBAABAAAAAAAAACICBAABAAAAAAAAACMCBAABAAAAAAAAACQCBAABAAAAAAAAACUCAgAgAAAAlgEAAGmHBAABAAAAtgEAAKwDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHNhbXN1bmcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU00tTTAyMkcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIAAAAAQAAAEgAAAABAAAATTAyMkdYWFUyQlVJNgAAAAAAAAAAAAAAAAAAAAAAAAAyMDIzOjA0OjIyIDExOjI1OjAxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIACaggUAAQAAADwDAACdggUAAQAAAEQDAAAiiAMAAQAAAAIAAAAniAMAAQAAADIAAAAwiAMAAQAAAAAAAAAyiAQAAQAAAAAAAAAAkAcABAAAADAyMjADkAIAFAAAAEwDAAAEkAIAFAAAAGADAAABkQcABAAAAAECAwABkgoAAQAAAHQDAAACkgUAAQAAAHwDAAADkgoAAQAAAIQDAAAEkgoAAQAAAIwDAAAFkgUAAQAAAJQDAAAHkgMAAQAAAAEAAAAIkgMAAQAAAP8AAAAJkgMAAQAAADAAAAAKkgUAAQAAAJwDAACQkgIAAgAAADE1AACRkgIAAgAAADE1AACSkgIAAgAAADE1AAAAoAcABAAAADAxMDABoAMAAQAAAAEAAAACoAQAAQAAABAKAAADoAQAAQAAAIwHAAAFoAQ',
+      //   'f2':"${fileData}"
+      // });
       // print(fileData);
-      print(res.statusCode);
+      // print(res.statusCode);
       // print(_fileName);
-      var jsonData = jsonDecode(res.body);
-      print(jsonData);
 
+      
+      // var jsonData = jsonDecode(res.body);
+      // print(jsonData);
+      EasyLoading.dismiss();
+      /*
       if(res.statusCode == 200){
         if(jsonData['status'] == true){
 
@@ -275,6 +442,7 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
           EasyLoading.dismiss();
         }
       }
+      */
 
     } catch (e) {
       EasyLoading.instance
@@ -286,9 +454,8 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
       EasyLoading.dismiss();
       print(e);
     }
+    */
   }
-
-  
 
   @override
   void initState() {
@@ -308,12 +475,16 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
       });
     });
 
-    clientList().then((value) {
-      setState(() {
-        _client_list = value;
-      });
-    });
+    // clientList().then((value) {
+    //   setState(() {
+    //     _client_list = value;
+    //   });
+    // });
     getCountNotification();
+
+    garageOwnerList();
+    clientList();
+    preferencesList();
   }
   
 
@@ -503,60 +674,155 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
                                       ),
                                     ),
                                     Divider(),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration( 
-                                        color:Colors.white, //background color of dropdown button
+                                    _garage_owner_list[0] == '' ?
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color:Colors.white, //background color of dropdown button
                                         border: Border.all(color: Colors.black26, width:1), //border of dropdown button
-                                        borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
-                                        boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
-                                                BoxShadow(
-                                                    color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
-                                                    blurRadius: 5) //blur radius of shadow
-                                              ]
-                                      ),
-                                      
-                                      child:Padding(
-                                        padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                        child:
-                                        DropdownWithSearch(
-                                          title: 'Client',
-                                          placeHolder: 'Search Client ID',
-                                          items: _client_list,
-                                          selected: selectedClientValue,
-                                          onChanged: (value) {
-
-                                            setState(() {
-                                              selectedClientValue = value;
-                                            });
-
-                                          },
-                                          label: 'Client',
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(100)),
-                                            color: Colors.transparent,
-                                            border: Border.all(color: Colors.transparent),
+                                          borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
+                                          boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
+                                                  BoxShadow(
+                                                      color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
+                                                      blurRadius: 5) //blur radius of shadow
+                                                ]),
+                                      width: double.infinity,
+                                      child: DropdownButtonHideUnderline(
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                          child: Row(
+                                            children: [
+                                              DropdownButton(
+                                                value: selectedGarageOwnerValue,
+                                                hint: Text("Garage Owner"),
+                                                items:  _garage_owner_list.map((list){
+                                                  return DropdownMenuItem(value: '',child: Text(''),);
+                                                  // return DropdownMenuItem(child: Text('t'), value: "data",);
+                                                }).toList(),
+                                                onChanged: (val){
+                                                  setState(() {
+                                                    selectedGarageOwnerValue = val.toString();
+                                                  });
+                                                  print(selectedGarageOwnerValue.toString());
+                                                }
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                                width: 20,
+                                                child: CircularProgressIndicator(color: Colors.blue, strokeWidth: 3.0,),
+                                              ),
+                                            ],
+                                          )
+                                        ),
+                                      )
+                                    )
+                                    :
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color:Colors.white, //background color of dropdown button
+                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
+                                          borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
+                                          boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
+                                                  BoxShadow(
+                                                      color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
+                                                      blurRadius: 5) //blur radius of shadow
+                                                ]),
+                                      width: double.infinity,
+                                      child: DropdownButtonHideUnderline(
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                          child: DropdownButton(
+                                            value: selectedGarageOwnerValue,
+                                            hint: Text("Garage Owner"),
+                                            items:  _garage_owner_list.map((list){
+                                              var name = list['first_name']+' '+list['last_name'];
+                                              return DropdownMenuItem(value: list['garage_owner_id'].toString(),child: Text(name),);
+                                              // return DropdownMenuItem(child: Text('t'), value: "data",);
+                                            }).toList(),
+                                            onChanged: (val){
+                                              setState(() {
+                                                selectedGarageOwnerValue = val.toString();
+                                              });
+                                              // print(selectedGarageOwnerValue.toString());
+                                            }
                                           ),
-                                          
                                         ),
                                       )
                                     ),
-                                    // SizedBox(height: 10,),
-                                    // Container(
-                                    //   child: TextFormField(
-                                    //     controller: garage_id,
-                                    //     decoration: ThemeHelper().textInputDecoration('Garage ID', 'Garage ID'),
-                                    //     validator: (val) {
-                                    //       if(val!.trim().isEmpty){
-                                    //         return "Garage ID is required";
-                                    //       }
-                                    //       else{
-                                    //         return null;
-                                    //       }
-                                          
-                                    //     },
-                                    //   ),
-                                    //   decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                                    // ),
+                                    SizedBox(height: 10,),
+                                    _client_list[0] == '' ?
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color:Colors.white, //background color of dropdown button
+                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
+                                          borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
+                                          boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
+                                                  BoxShadow(
+                                                      color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
+                                                      blurRadius: 5) //blur radius of shadow
+                                                ]),
+                                      width: double.infinity,
+                                      child: DropdownButtonHideUnderline(
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                          child: Row(
+                                            children: [
+                                              DropdownButton(
+                                                value: selectedClientValue,
+                                                hint: Text("Client ID"),
+                                                items:  _client_list.map((list){
+                                                  return DropdownMenuItem(value: '',child: Text(''),);
+                                                  // return DropdownMenuItem(child: Text('t'), value: "data",);
+                                                }).toList(),
+                                                onChanged: (val){
+                                                  setState(() {
+                                                    selectedClientValue = val.toString();
+                                                  });
+                                                  // print(selectedClientValue.toString());
+                                                }
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                                width: 20,
+                                                child: CircularProgressIndicator(color: Colors.blue, strokeWidth: 3.0,),
+                                              ),
+                                            ],
+                                          )
+                                        ),
+                                      )
+                                    )
+                                    :
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color:Colors.white, //background color of dropdown button
+                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
+                                          borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
+                                          boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
+                                                  BoxShadow(
+                                                      color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
+                                                      blurRadius: 5) //blur radius of shadow
+                                                ]),
+                                      width: double.infinity,
+                                      child: DropdownButtonHideUnderline(
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                          child: DropdownButton(
+                                            value: selectedClientValue,
+                                            hint: Text("Client ID"),
+                                            items:  _client_list.map((list){
+                                              var name = list['ClientID'];
+                                              return DropdownMenuItem(value: list['ClientID'].toString(),child: Text(name),);
+                                              // return DropdownMenuItem(child: Text('t'), value: "data",);
+                                            }).toList(),
+                                            onChanged: (val){
+                                              setState(() {
+                                                selectedClientValue = val.toString();
+                                              });
+                                              // print(selectedClientValue.toString());
+                                            }
+                                          ),
+                                        ),
+                                      )
+                                    ),
                                     SizedBox(height: 10,),
                                     Container(
                                       child: TextFormField(
@@ -643,247 +909,106 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
                                       decoration: ThemeHelper().inputBoxDecorationShaddow(),
                                     ),
                                     SizedBox(height: 10,),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration( 
-                                        color:Colors.white, //background color of dropdown button
-                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
-                                        borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
-                                        boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
-                                                BoxShadow(
-                                                    color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
-                                                    blurRadius: 5) //blur radius of shadow
-                                              ]
-                                      ),
-                                      
-                                      child:Padding(
-                                        padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                        child:
-                                        DropdownWithSearch(
-                                          title: 'Total number of floors',
-                                          placeHolder: 'Search total number of floors',
-                                          items: _totalNoOfFloors,
-                                          selected: selectedTotalNoOfFloorsValue,
-                                          onChanged: (value) async{
-                                            
-                                            setState(() {
-                                              selectedTotalNoOfFloorsValue = value;
-                                            });
-
-                                          },
-                                          label: 'Total number of floors',
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(100)),
-                                            color: Colors.transparent,
-                                            border: Border.all(color: Colors.transparent),
-                                          ),
+                                    Container(
+                                      child: TextFormField(
+                                        controller: selectedTotalNoOfFloorsValue,
+                                        decoration: ThemeHelper().textInputDecoration('Total number of floors', 'Total number of floors'),
+                                        validator: (val) {
+                                          if(val!.trim().isEmpty){
+                                            return "Total number of floors is required";
+                                          }
+                                          else{
+                                            return null;
+                                          }
                                           
-                                        ),
-                                      )
+                                        },
+                                      ),
+                                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
                                     ),
                                     SizedBox(height: 10,),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration( 
-                                        color:Colors.white, //background color of dropdown button
-                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
-                                        borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
-                                        boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
-                                                BoxShadow(
-                                                    color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
-                                                    blurRadius: 5) //blur radius of shadow
-                                              ]
-                                      ),
-                                      
-                                      child:Padding(
-                                        padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                        child:
-                                        DropdownWithSearch(
-                                          title: 'Space per floor',
-                                          placeHolder: 'Search space per floor',
-                                          items: _spacePerFloors,
-                                          selected: selectedSpacePerFloorValue,
-                                          onChanged: (value) {
-
-                                            setState(() {
-                                              selectedSpacePerFloorValue = value;
-                                            });
-
-                                            //print(jsonData[value]);
-
-
-                                          },
-                                          label: 'Space per floor',
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(100)),
-                                            color: Colors.transparent,
-                                            border: Border.all(color: Colors.transparent),
-                                          ),
+                                    Container(
+                                      child: TextFormField(
+                                        controller: selectedSpacePerFloorValue,
+                                        decoration: ThemeHelper().textInputDecoration('Space per floor', 'Space per floor'),
+                                        validator: (val) {
+                                          if(val!.trim().isEmpty){
+                                            return "Space per floor is required";
+                                          }
+                                          else{
+                                            return null;
+                                          }
                                           
-                                        ),
-                                      )
+                                        },
+                                      ),
+                                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
                                     ),
                                     SizedBox(height: 10,),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration( 
-                                        color:Colors.white, //background color of dropdown button
-                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
-                                        borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
-                                        boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
-                                                BoxShadow(
-                                                    color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
-                                                    blurRadius: 5) //blur radius of shadow
-                                              ]
-                                      ),
-                                      
-                                      child:Padding(
-                                        padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                        child:
-                                        DropdownWithSearch(
-                                          title: 'Total number of space',
-                                          placeHolder: 'Search total number of space',
-                                          items: _totalNoOfspace,
-                                          selected: selectedNoOfSpaceValue,
-                                          onChanged: (value) {
-
-                                            setState(() {
-                                              selectedNoOfSpaceValue = value;
-                                            });
-
-                                            //print(jsonData[value]);
-
-
-                                          },
-                                          label: 'Total number of space',
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(100)),
-                                            color: Colors.transparent,
-                                            border: Border.all(color: Colors.transparent),
-                                          ),
+                                    Container(
+                                      child: TextFormField(
+                                        controller: selectedNoOfSpaceValue,
+                                        decoration: ThemeHelper().textInputDecoration('Total number of space', 'Total number of space'),
+                                        validator: (val) {
+                                          if(val!.trim().isEmpty){
+                                            return "Total number of space is required";
+                                          }
+                                          else{
+                                            return null;
+                                          }
                                           
-                                        ),
-                                      )
+                                        },
+                                      ),
+                                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
                                     ),
                                     SizedBox(height: 10,),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration( 
-                                        color:Colors.white, //background color of dropdown button
-                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
-                                        borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
-                                        boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
-                                                BoxShadow(
-                                                    color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
-                                                    blurRadius: 5) //blur radius of shadow
-                                              ]
-                                      ),
-                                      
-                                      child:Padding(
-                                        padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                        child:
-                                        DropdownWithSearch(
-                                          title: 'No of rows',
-                                          placeHolder: 'Search no of rows',
-                                          items: _noOfRows,
-                                          selected: selectedNoOfRowsValue,
-                                          onChanged: (value) {
-
-                                            setState(() {
-                                              selectedNoOfRowsValue = value;
-                                            });
-
-                                            //print(jsonData[value]);
-
-
-                                          },
-                                          label: 'No of rows',
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(100)),
-                                            color: Colors.transparent,
-                                            border: Border.all(color: Colors.transparent),
-                                          ),
+                                    Container(
+                                      child: TextFormField(
+                                        controller: selectedNoOfRowsValue,
+                                        decoration: ThemeHelper().textInputDecoration('No of rows', 'No of rows'),
+                                        validator: (val) {
+                                          if(val!.trim().isEmpty){
+                                            return "No of rows is required";
+                                          }
+                                          else{
+                                            return null;
+                                          }
                                           
-                                        ),
-                                      )
+                                        },
+                                      ),
+                                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
                                     ),
                                     SizedBox(height: 10,),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration( 
-                                        color:Colors.white, //background color of dropdown button
-                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
-                                        borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
-                                        boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
-                                                BoxShadow(
-                                                    color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
-                                                    blurRadius: 5) //blur radius of shadow
-                                              ]
-                                      ),
-                                      
-                                      child:Padding(
-                                        padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                        child:
-                                        DropdownWithSearch(
-                                          title: 'No of columns',
-                                          placeHolder: 'Search no of columns',
-                                          items: _noOfColumns,
-                                          selected: selectedNoOfColumnsValue,
-                                          onChanged: (value) {
-
-                                            setState(() {
-                                              selectedNoOfColumnsValue = value;
-                                            });
-
-                                            //print(jsonData[value]);
-
-
-                                          },
-                                          label: 'No of columns',
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(100)),
-                                            color: Colors.transparent,
-                                            border: Border.all(color: Colors.transparent),
-                                          ),
+                                    Container(
+                                      child: TextFormField(
+                                        controller: selectedNoOfColumnsValue,
+                                        decoration: ThemeHelper().textInputDecoration('No of columns', 'No of columns'),
+                                        validator: (val) {
+                                          if(val!.trim().isEmpty){
+                                            return "No of columns is required";
+                                          }
+                                          else{
+                                            return null;
+                                          }
                                           
-                                        ),
-                                      )
+                                        },
+                                      ),
+                                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
                                     ),
                                     SizedBox(height: 10,),
-                                    DecoratedBox(
-                                      decoration: BoxDecoration( 
-                                        color:Colors.white, //background color of dropdown button
-                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
-                                        borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
-                                        boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
-                                                BoxShadow(
-                                                    color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
-                                                    blurRadius: 5) //blur radius of shadow
-                                              ]
-                                      ),
-                                      
-                                      child:Padding(
-                                        padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                                        child:
-                                        DropdownWithSearch(
-                                          title: 'Garage Layout',
-                                          placeHolder: 'Search garage layout',
-                                          items: _garageLayout,
-                                          selected: selectedGarageLayoutValue,
-                                          onChanged: (value) {
-
-                                            setState(() {
-                                              selectedGarageLayoutValue = value;
-                                            });
-
-                                            //print(jsonData[value]);
-
-
-                                          },
-                                          label: 'Garage Layout',
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(Radius.circular(100)),
-                                            color: Colors.transparent,
-                                            border: Border.all(color: Colors.transparent),
-                                          ),
+                                    Container(
+                                      child: TextFormField(
+                                        controller: selectedGarageLayoutValue,
+                                        decoration: ThemeHelper().textInputDecoration('Garage Layout', 'Garage Layout'),
+                                        validator: (val) {
+                                          if(val!.trim().isEmpty){
+                                            return "Garage Layout is required";
+                                          }
+                                          else{
+                                            return null;
+                                          }
                                           
-                                        ),
-                                      )
+                                        },
+                                      ),
+                                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
                                     ),
                                     SizedBox(height: 10,),
                                     Container(
@@ -931,6 +1056,81 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
                                       ),
                                       decoration: ThemeHelper().inputBoxDecorationShaddow(),
                                     ),
+                                    SizedBox(height: 10,),
+                                    _preferences_list[0] == '' ?
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color:Colors.white, //background color of dropdown button
+                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
+                                          borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
+                                          boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
+                                                  BoxShadow(
+                                                      color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
+                                                      blurRadius: 5) //blur radius of shadow
+                                                ]),
+                                      width: double.infinity,
+                                      child: DropdownButtonHideUnderline(
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                          child: Row(
+                                            children: [
+                                              DropdownButton(
+                                                value: selectedPreferencesValue,
+                                                hint: Text("Preferences"),
+                                                items:  _preferences_list.map((list){
+                                                  return DropdownMenuItem(value: '',child: Text(''),);
+                                                  // return DropdownMenuItem(child: Text('t'), value: "data",);
+                                                }).toList(),
+                                                onChanged: (val){
+                                                  setState(() {
+                                                    selectedPreferencesValue = val.toString();
+                                                  });
+                                                  // print(selectedPreferencesValue.toString());
+                                                }
+                                              ),
+                                              SizedBox(
+                                                height: 20,
+                                                width: 20,
+                                                child: CircularProgressIndicator(color: Colors.blue, strokeWidth: 3.0,),
+                                              ),
+                                            ],
+                                          )
+                                        ),
+                                      )
+                                    )
+                                    :
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color:Colors.white, //background color of dropdown button
+                                        border: Border.all(color: Colors.black26, width:1), //border of dropdown button
+                                          borderRadius: BorderRadius.circular(100), //border raiuds of dropdown button
+                                          boxShadow: <BoxShadow>[ //apply shadow on Dropdown button
+                                                  BoxShadow(
+                                                      color: Color.fromRGBO(0, 0, 0, 0.1), //shadow for button
+                                                      blurRadius: 5) //blur radius of shadow
+                                                ]),
+                                      width: double.infinity,
+                                      child: DropdownButtonHideUnderline(
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                          child: DropdownButton(
+                                            value: selectedPreferencesValue,
+                                            hint: Text("Preferences"),
+                                            items:  _preferences_list.map((list){
+                                              var name = list['preferences_name'];
+                                              return DropdownMenuItem(value: list['id'].toString(),child: Text(name),);
+                                              // return DropdownMenuItem(child: Text('t'), value: "data",);
+                                            }).toList(),
+                                            onChanged: (val){
+                                              setState(() {
+                                                selectedPreferencesValue = val.toString();
+                                              });
+                                              // print(selectedPreferencesValue.toString());
+                                            }
+                                          ),
+                                        ),
+                                      )
+                                    ),
                                     SizedBox(height: 15.0),
                                     Container(
                                       decoration: ThemeHelper().buttonBoxDecoration(context),
@@ -952,7 +1152,32 @@ class _AddGarageFormBAdminState extends State<AddGarageFormBAdmin> {
                                           // if (_formKey.currentState!.validate()) {
                                             
                                           // }
-                                          add_garage_form_a();
+                                          // add_garage_form_b();
+
+                                          _formKey.currentState!.save();
+                                          Map<String, String> body = {
+                                            // 'title': upload_file.text
+                                            'garage_owner_id' : selectedGarageOwnerValue!,
+                                            'client_id' : selectedClientValue!,
+                                            'preferences_id' : selectedPreferencesValue!,
+                                            'garage_name' : garage_name.text,
+                                            'high_clearance' : high_clearance.text,
+                                            'floor_height' : floor_height.text,
+                                            'length_of_parking_space' : length_of_parking_space.text,
+                                            'width_of_parking_space' : width_of_parking_space.text,
+                                            'total_number_of_floor' : selectedTotalNoOfFloorsValue.text,
+                                            'space_per_floor' : selectedSpacePerFloorValue.text,
+                                            'total_number_of_space' : selectedNoOfSpaceValue.text,
+                                            'no_of_rows' : selectedNoOfRowsValue.text,
+                                            'no_of_columns' : selectedNoOfColumnsValue.text,
+                                            'garage_layout' : selectedGarageLayoutValue.text,
+                                            'comments' : comments.text,
+                                            'lat' : lat.toString(),
+                                            'lng' : lng.toString(),
+                                            'location' : location!
+                                          };
+
+                                          add_garage_form_b(body, _image!.path);
 
                                         },
                                       ),

@@ -307,16 +307,16 @@ class _OrdersAdminState extends State<OrdersAdmin> {
                             
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('Product Name')),
+                                label: Center(child: Text('Product Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Product Price')),
+                                label: Center(child: Text('Product Price', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('User Email')),
+                                label: Center(child: Text('User Email', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Status')),
+                                label: Center(child: Text('Status', style: TextStyle(color: Colors.white),)),
                               )
                             ],
                             rows: _filterData

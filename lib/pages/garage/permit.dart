@@ -342,25 +342,25 @@ class _PermitGarageState extends State<PermitGarage> {
                             
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('Name')),
+                                label: Center(child: Text('Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Location')),
+                                label: Center(child: Text('Location', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Status')),
+                                label: Center(child: Text('Status', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Type')),
+                                label: Center(child: Text('Type', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Duration')),
+                                label: Center(child: Text('Duration', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Section')),
+                                label: Center(child: Text('Section', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('License Plate #')),
+                                label: Center(child: Text('License Plate #', style: TextStyle(color: Colors.white),)),
                               ),
                             ],
                             rows: _filterData

@@ -25,15 +25,16 @@ class SideBarNav extends StatelessWidget {
       width: 230,
       child: Container(
         decoration:BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0.0, 1.0],
-                colors: [
-                  Theme.of(context).primaryColor.withOpacity(0.2),
-                  Theme.of(context).accentColor.withOpacity(0.5),
-                ]
-            )
+            color: Colors.white
+            // gradient: LinearGradient(
+            //     begin: Alignment.topLeft,
+            //     end: Alignment.bottomRight,
+            //     stops: [0.0, 1.0],
+            //     colors: [
+            //       Theme.of(context).primaryColor.withOpacity(0.2),
+            //       Theme.of(context).accentColor.withOpacity(0.5),
+            //     ]
+            // )
         ) ,
         child: Column(
           children: [
@@ -77,9 +78,9 @@ class SideBarNav extends StatelessWidget {
                         //   height: 100,
                         // ),
                         SizedBox(height: 10,),
-                        Text(userName, style: TextStyle(fontSize: 18),),
+                        Text(userName, style: TextStyle(fontSize: 18, color: Colors.white),),
                         SizedBox(height: 10,),
-                        Text(userEmail),
+                        Text(userEmail, style: TextStyle(color: Colors.white),),
                         
                       ],
                     ),

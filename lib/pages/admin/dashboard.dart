@@ -574,7 +574,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                                                   ),
                                                   Container(
                                                     padding: EdgeInsets.only(left: 13, right: 13, top: 7, bottom: 7),
-                                                    child: Icon(Icons.mail_outline_rounded, color: Colors.white, size: 30,),
+                                                    child: Icon(Icons.border_all_outlined, color: Colors.white, size: 30,),
                                                     decoration: BoxDecoration(
                                                       color: Colors.blue,
                                                       borderRadius: BorderRadius.circular(10)
@@ -624,7 +624,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                                                   ),
                                                   Container(
                                                     padding: EdgeInsets.only(left: 13, right: 13, top: 7, bottom: 7),
-                                                    child: Icon(Icons.mail_outline_rounded, color: Colors.white, size: 30,),
+                                                    child: Icon(Icons.auto_awesome_mosaic_outlined, color: Colors.white, size: 30,),
                                                     decoration: BoxDecoration(
                                                       color: Colors.blue,
                                                       borderRadius: BorderRadius.circular(10)
@@ -670,7 +670,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                                                   ),
                                                   Container(
                                                     padding: EdgeInsets.only(left: 13, right: 13, top: 7, bottom: 7),
-                                                    child: Icon(Icons.mail_outline_rounded, color: Colors.white, size: 30,),
+                                                    child: Icon(Icons.ballot_outlined, color: Colors.white, size: 30,),
                                                     decoration: BoxDecoration(
                                                       color: Colors.blue,
                                                       borderRadius: BorderRadius.circular(10)
@@ -766,19 +766,19 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                                         ),
                                         columns: [
                                           DataColumn(
-                                            label: Center(child: Text('Client ID')),
+                                            label: Center(child: Text('Client ID', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Client Name')),
+                                            label: Center(child: Text('Client Name', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Address')),
+                                            label: Center(child: Text('Address', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('State')),
+                                            label: Center(child: Text('State', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('View Details')),
+                                            label: Center(child: Text('View Details', style: TextStyle(color: Colors.white),)),
                                           ),
                                           
                                         ],
@@ -910,13 +910,13 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                                         
                                         columns: [
                                           DataColumn(
-                                            label: Center(child: Text('Name')),
+                                            label: Center(child: Text('Name', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Email')),
+                                            label: Center(child: Text('Email', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Roll')),
+                                            label: Center(child: Text('Roll', style: TextStyle(color: Colors.white),)),
                                           ),
                                         ],
                                         rows: _filterUserData

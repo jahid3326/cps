@@ -337,22 +337,22 @@ class _ManagersGarageState extends State<ManagersGarage> {
                             ),
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('First Name')),
+                                label: Center(child: Text('First Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Last Name')),
+                                label: Center(child: Text('Last Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('User Name')),
+                                label: Center(child: Text('User Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Email')),
+                                label: Center(child: Text('Email', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Garage')),
+                                label: Center(child: Text('Garage', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Action')),
+                                label: Center(child: Text('Action', style: TextStyle(color: Colors.white),)),
                               )
                             ],
                             rows: _filterData

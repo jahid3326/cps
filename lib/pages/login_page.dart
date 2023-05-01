@@ -72,6 +72,8 @@ class _LoginPageState extends State<LoginPage> {
   // }
 
   Future<void> loginIn()async{
+    // print('object');
+    
     var client = http.Client();
     
       try{
@@ -183,6 +185,7 @@ class _LoginPageState extends State<LoginPage> {
         EasyLoading.dismiss();
         print(e);
       }
+    
   }
 
   @override
@@ -341,22 +344,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (BuildContext context){
         return AlertDialog(
-          content: Expanded(
-            child: Container(
-              height: 220,
-              width: 200,
-              child: Column(
-                children: [
-                  Container(
-                    height: 200,
-                    width: 200,
-                    child: Image.asset("assets/images/Questions-pana-1.png", width: 200, height: 200,),
-                  ),
-                  const Text("Do you want to close the app ?", style: TextStyle(color: Colors.grey),)
-                ],
-              ),
-            )
-          ),
+          content: Text("Do you want to close the app ?", style: TextStyle(color: Colors.grey),),
           actions: [
             TextButton(
               onPressed: (){

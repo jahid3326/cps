@@ -7,6 +7,7 @@ import 'package:cps/pages/garage/myaccount.dart';
 import 'package:cps/pages/garage/permit.dart';
 import 'package:cps/pages/garage/pricing_rates.dart';
 import 'package:cps/pages/garage/view_staff.dart';
+import 'package:cps/pages/garage/zoom.dart';
 import 'package:cps/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,15 +29,16 @@ class SideBarNav extends StatelessWidget {
       width: 230,
       child: Container(
         decoration:BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0.0, 1.0],
-                colors: [
-                  Theme.of(context).primaryColor.withOpacity(0.2),
-                  Theme.of(context).accentColor.withOpacity(0.5),
-                ]
-            )
+            color: Colors.white
+            // gradient: LinearGradient(
+            //     begin: Alignment.topLeft,
+            //     end: Alignment.bottomRight,
+            //     stops: [0.0, 1.0],
+            //     colors: [
+            //       Theme.of(context).primaryColor.withOpacity(0.2),
+            //       Theme.of(context).accentColor.withOpacity(0.5),
+            //     ]
+            // )
         ) ,
         child: Column(
           children: [
@@ -80,9 +82,9 @@ class SideBarNav extends StatelessWidget {
                         //   height: 100,
                         // ),
                         SizedBox(height: 10,),
-                        Text(userName, style: TextStyle(fontSize: 18),),
+                        Text(userName, style: TextStyle(fontSize: 18, color: Colors.white),),
                         SizedBox(height: 10,),
-                        Text(userEmail),
+                        Text(userEmail, style: TextStyle(color: Colors.white),),
                         
                       ],
                     ),
@@ -226,7 +228,7 @@ class SideBarNav extends StatelessWidget {
                   children: [
                     ListTile(
                       contentPadding: EdgeInsets.only(left: 50.0,),
-                      leading: Icon(Icons.circle, color: Colors.blue.shade300,),
+                      leading: Icon(Icons.arrow_right_alt_rounded, color: Colors.blue.shade500,),
                       title: Text("Add New Staff", style: TextStyle(color: Colors.black87),),
                       minLeadingWidth: 10,
                       onTap: () {
@@ -239,7 +241,7 @@ class SideBarNav extends StatelessWidget {
                     ),
                     ListTile(
                       contentPadding: EdgeInsets.only(left: 50.0,),
-                      leading: Icon(Icons.circle, color: Colors.blue.shade300,),
+                      leading: Icon(Icons.arrow_right_alt_rounded, color: Colors.blue.shade500,),
                       title: Text("View Staff", style: TextStyle(color: Colors.black87),),
                       minLeadingWidth: 10,
                       onTap: () {
@@ -255,7 +257,7 @@ class SideBarNav extends StatelessWidget {
                 Divider(color: Theme.of(context).primaryColor, height: 1,),
                 ListTile(
                   leading: Icon(Icons.description_rounded, size: _drawerIconSize, color: Theme.of(context).accentColor,),
-                  title: Text('Citiation', style: TextStyle(fontSize: 17, color: Theme.of(context).accentColor),),
+                  title: Text('Citation', style: TextStyle(fontSize: 17, color: Theme.of(context).accentColor),),
                   minLeadingWidth : 10,
                   selectedTileColor: Colors.grey,
                   onTap: () {
@@ -263,6 +265,20 @@ class SideBarNav extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context)=>CitiationGarage())
+                    );
+                  },
+                ),
+                Divider(color: Theme.of(context).primaryColor, height: 1,),
+                ListTile(
+                  leading: Icon(Icons.description_rounded, size: _drawerIconSize, color: Theme.of(context).accentColor,),
+                  title: Text('Zoom', style: TextStyle(fontSize: 17, color: Theme.of(context).accentColor),),
+                  minLeadingWidth : 10,
+                  selectedTileColor: Colors.grey,
+                  onTap: () {
+                    // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>CitiationGarage()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context)=>ZoomImage())
                     );
                   },
                 ),

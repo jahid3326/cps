@@ -66,6 +66,7 @@ dependencies:
   dio: ^4.0.6
   flutter_stripe: ^5.0.0
   flutter_dotenv: ^5.0.2
+  path: ^1.8.2
 
 dev_dependencies:
   flutter_test:
@@ -93,6 +94,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/images/app_logo.png
     - assets/images/cps_logo.png
     - assets/images/avatar.jpg
     - assets/images/image-thumbnail.jpg

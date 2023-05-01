@@ -13,6 +13,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //Assign publishable key to flutter_stripe
+  // pk_live_51Ha7ksFqvNa68R4aELbp4FEzIubfoBRFInwUSMLEnfQBiqgjMp3KIoJOwpo4nXofLMKKgnOmykVkaIN1JRQ5VTY900QSl0vA43
+  // pk_test_51MppgACRix9ffceRBgiV8R0sSFGxFq6NbzSnHxtt5Y2Q7G860qKPMkn52uXFaYBHsqXTR3PxxSwXTiXYaKfbo1SQ003o0LctVn
   Stripe.publishableKey =
       "pk_live_51Ha7ksFqvNa68R4aELbp4FEzIubfoBRFInwUSMLEnfQBiqgjMp3KIoJOwpo4nXofLMKKgnOmykVkaIN1JRQ5VTY900QSl0vA43";
 

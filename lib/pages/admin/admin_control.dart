@@ -306,13 +306,13 @@ class _AdminControlAdminState extends State<AdminControlAdmin> {
                             
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('Full Name')),
+                                label: Center(child: Text('Full Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Email')),
+                                label: Center(child: Text('Email', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Roll')),
+                                label: Center(child: Text('Roll', style: TextStyle(color: Colors.white),)),
                               ),
                             ],
                             rows: _filterData

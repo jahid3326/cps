@@ -161,7 +161,7 @@ class _AddNewStaffAdminState extends State<AddNewStaffAdmin> {
             ..backgroundColor = Colors.green.shade200
             ..indicatorColor = Colors.green.shade900
             ..textColor = Colors.green.shade900;
-          EasyLoading.showSuccess('Add Success!');
+          EasyLoading.showSuccess('New staff added successfully');
           EasyLoading.dismiss();
           // Navigator.pushReplacement(
           //   context,
@@ -561,7 +561,7 @@ class _AddNewStaffAdminState extends State<AddNewStaffAdmin> {
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                                           child: Text(
-                                            "Saved".toUpperCase(),
+                                            "Submit".toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,

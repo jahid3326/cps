@@ -272,7 +272,7 @@ class _NewPricingAdminState extends State<NewPricingAdmin> {
             ..backgroundColor = Colors.green.shade200
             ..indicatorColor = Colors.green.shade900
             ..textColor = Colors.green.shade900;
-          EasyLoading.showSuccess('Add Success!');
+          EasyLoading.showSuccess('New pricing added successfully!');
           EasyLoading.dismiss();
         }else{
           EasyLoading.instance
@@ -660,7 +660,7 @@ class _NewPricingAdminState extends State<NewPricingAdmin> {
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                                           child: Text(
-                                            "Add Price".toUpperCase(),
+                                            "Submit".toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,

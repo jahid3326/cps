@@ -252,7 +252,7 @@ class _NewPermitGarageState extends State<NewPermitGarage> {
             ..backgroundColor = Colors.green.shade200
             ..indicatorColor = Colors.green.shade900
             ..textColor = Colors.green.shade900;
-          EasyLoading.showSuccess('Add Success!');
+          EasyLoading.showSuccess('New permit added successfully');
           EasyLoading.dismiss();
         }else{
           EasyLoading.instance
@@ -636,7 +636,23 @@ class _NewPermitGarageState extends State<NewPermitGarage> {
                                     Container(
                                       child: TextFormField(
                                         controller: type_date,
-                                        readOnly: true,
+                                        decoration: ThemeHelper().textInputDecoration('Type (Time Frame)', 'Enter Type (Time Frame)'),
+                                        validator: (val) {
+                                          if(val!.trim().isEmpty){
+                                            return "Type (Time Frame) is required";
+                                          }
+                                          else{
+                                            return null;
+                                          }
+                                          
+                                        },
+                                      ),
+                                      decoration: ThemeHelper().inputBoxDecorationShaddow(),
+                                    ),
+                                    /*Container(
+                                      child: TextFormField(
+                                        controller: type_date,
+                                        // readOnly: true,
                                         onTap: () {
                                           _selectTypeDate(context);
                                         },
@@ -660,7 +676,7 @@ class _NewPermitGarageState extends State<NewPermitGarage> {
                                         )
                                       ),
                                       decoration: ThemeHelper().inputBoxDecorationShaddow(),
-                                    ),
+                                    ),*/
                                     SizedBox(height: 10,),
                                     Container(
                                       child: TextFormField(
@@ -773,7 +789,7 @@ class _NewPermitGarageState extends State<NewPermitGarage> {
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                                           child: Text(
-                                            "Add Permit".toUpperCase(),
+                                            "Submit".toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,

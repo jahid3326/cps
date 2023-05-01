@@ -306,16 +306,16 @@ class _MotoristAdminState extends State<MotoristAdmin> {
                             
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('User Name')),
+                                label: Center(child: Text('User Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Email')),
+                                label: Center(child: Text('Email', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Status')),
+                                label: Center(child: Text('Status', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Action')),
+                                label: Center(child: Text('Action', style: TextStyle(color: Colors.white),)),
                               )
                             ],
                             rows: _filterData

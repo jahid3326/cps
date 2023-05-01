@@ -169,7 +169,7 @@ class _AddNewClientAdminState extends State<AddNewClientAdmin> {
             ..backgroundColor = Colors.green.shade200
             ..indicatorColor = Colors.green.shade900
             ..textColor = Colors.green.shade900;
-          EasyLoading.showSuccess('Add Success!');
+          EasyLoading.showSuccess('New client added successfully');
           EasyLoading.dismiss();
           // Navigator.pushReplacement(
           //   context,
@@ -585,7 +585,7 @@ class _AddNewClientAdminState extends State<AddNewClientAdmin> {
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                                           child: Text(
-                                            "Saved".toUpperCase(),
+                                            "Submit".toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,

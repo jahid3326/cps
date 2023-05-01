@@ -249,19 +249,19 @@ class _BillingDetailsMotoristState extends State<BillingDetailsMotorist> {
                             
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('Name')),
+                                label: Center(child: Text('Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Package')),
+                                label: Center(child: Text('Package', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Type')),
+                                label: Center(child: Text('Type', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('PaymentDate')),
+                                label: Center(child: Text('PaymentDate', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Amount')),
+                                label: Center(child: Text('Amount', style: TextStyle(color: Colors.white),)),
                               ),
                             ],
                             rows: _filterData

@@ -160,7 +160,7 @@ class _AddGarageFormAAdminState extends State<AddGarageFormAAdmin> {
       );
 
       var res = await client.post(Uri.https('creativeparkingsolutions.com', 'public/add_garage_form_a_app.php'), body: {
-          'garage_owner_id' : selectedGarageValue,
+          // 'garage_owner_id' : selectedGarageValue,
           'client_first_name' : client_first_name.text,
           'client_last_name' : client_last_name.text,
           'phone' : phone_no.text,
@@ -183,7 +183,7 @@ class _AddGarageFormAAdminState extends State<AddGarageFormAAdmin> {
         if(jsonData['status'] == true){
 
           setState(() {
-            selectedGarageValue = 'Choose Garage Owner';
+            // selectedGarageValue = 'Choose Garage Owner';
             client_first_name.text = '';
             client_last_name.text = '';
             phone_no.text = '';
@@ -201,7 +201,7 @@ class _AddGarageFormAAdminState extends State<AddGarageFormAAdmin> {
             ..backgroundColor = Colors.green.shade200
             ..indicatorColor = Colors.green.shade900
             ..textColor = Colors.green.shade900;
-          EasyLoading.showSuccess('Add Success!');
+          EasyLoading.showSuccess('Garage form A added successfully');
           EasyLoading.dismiss();
           // Navigator.pushReplacement(
           //   context,
@@ -409,6 +409,7 @@ class _AddGarageFormAAdminState extends State<AddGarageFormAAdmin> {
                                 child: 
                                 Column(
                                   children: [
+                                    /*
                                     DecoratedBox(
                                       decoration: BoxDecoration( 
                                         color:Colors.white, //background color of dropdown button
@@ -447,6 +448,7 @@ class _AddGarageFormAAdminState extends State<AddGarageFormAAdmin> {
                                       )
                                     ),
                                     SizedBox(height: 10,),
+                                    */
                                     Container(
                                       child: TextFormField(
                                         controller: client_first_name,

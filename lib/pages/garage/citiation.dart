@@ -153,7 +153,7 @@ class _CitiationGarageState extends State<CitiationGarage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("Citiation",
+        title: Text("Citation",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         elevation: 0.5,
@@ -340,22 +340,22 @@ class _CitiationGarageState extends State<CitiationGarage> {
                             
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('License Plate')),
+                                label: Center(child: Text('License Plate', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Date Issued')),
+                                label: Center(child: Text('Date Issued', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Time')),
+                                label: Center(child: Text('Time', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Amount')),
+                                label: Center(child: Text('Amount', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Status')),
+                                label: Center(child: Text('Status', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Action')),
+                                label: Center(child: Text('Action', style: TextStyle(color: Colors.white),)),
                               ),
                             ],
                             rows: _filterData

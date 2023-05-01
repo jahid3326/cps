@@ -400,16 +400,16 @@ class _ApproveAdminState extends State<ApproveAdmin> {
                                         
                                         columns: [
                                           DataColumn(
-                                            label: Center(child: Text('User Name')),
+                                            label: Center(child: Text('User Name', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Email')),
+                                            label: Center(child: Text('Email', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Status')),
+                                            label: Center(child: Text('Status', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Action')),
+                                            label: Center(child: Text('Action', style: TextStyle(color: Colors.white),)),
                                           )
                                         ],
                                         rows: _filterMotoristData
@@ -490,22 +490,7 @@ class _ApproveAdminState extends State<ApproveAdmin> {
                                                                   context: context,
                                                                   builder: (BuildContext context){
                                                                     return AlertDialog(
-                                                                      content: Expanded(
-                                                                        child: Container(
-                                                                          height: 220,
-                                                                          width: 200,
-                                                                          child: Column(
-                                                                            children: [
-                                                                              Container(
-                                                                                height: 200,
-                                                                                width: 200,
-                                                                                child: Image.asset("assets/images/Questions-pana-1.png", width: 200, height: 200,),
-                                                                              ),
-                                                                              const Text("Do you want to deapprove this ?", style: TextStyle(color: Colors.grey),)
-                                                                            ],
-                                                                          ),
-                                                                        )
-                                                                      ),
+                                                                      content: const Text("Do you want to deapprove this ?", style: TextStyle(color: Colors.grey),),
                                                                       actions: [
                                                                         TextButton(
                                                                           onPressed: (){

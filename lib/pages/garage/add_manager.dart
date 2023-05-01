@@ -169,7 +169,7 @@ class _NewManagerGarageState extends State<NewManagerGarage> {
             ..backgroundColor = Colors.green.shade200
             ..indicatorColor = Colors.green.shade900
             ..textColor = Colors.green.shade900;
-          EasyLoading.showSuccess('Add Success!');
+          EasyLoading.showSuccess('New manager added successfully');
           EasyLoading.dismiss();
         }else{
           EasyLoading.instance
@@ -558,7 +558,7 @@ class _NewManagerGarageState extends State<NewManagerGarage> {
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                                           child: Text(
-                                            "Add Manager".toUpperCase(),
+                                            "Submit".toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,

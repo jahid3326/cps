@@ -356,19 +356,19 @@ class _ViewStaffGarageState extends State<ViewStaffGarage> {
                                         ),
                                         columns: [
                                           DataColumn(
-                                            label: Center(child: Text('First Name')),
+                                            label: Center(child: Text('First Name', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Last Name')),
+                                            label: Center(child: Text('Last Name', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Email')),
+                                            label: Center(child: Text('Email', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Roll')),
+                                            label: Center(child: Text('Roll', style: TextStyle(color: Colors.white),)),
                                           ),
                                           DataColumn(
-                                            label: Center(child: Text('Action')),
+                                            label: Center(child: Text('Action', style: TextStyle(color: Colors.white),)),
                                           ),
                                           
                                         ],

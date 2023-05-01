@@ -5,8 +5,10 @@ import 'package:cps/pages/admin/add_garage_form_a.dart';
 // import 'package:cps/pages/garage/garage_map.dart';
 
 import 'package:cps/common/theme_helper.dart';
+import 'package:cps/pages/admin/add_garage_form_b.dart';
 import 'package:cps/pages/admin/notifications.dart';
 import 'package:cps/pages/admin/sidebar_nav.dart';
+import 'package:cps/pages/admin/upload_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:cps/pages/widgets/header_widget.dart';
@@ -293,14 +295,18 @@ class _GarageListAdminState extends State<GarageListAdmin> {
                       SizedBox(width: 5,),
                       ElevatedButton(
                         onPressed: (){
-                          // Navigator.pushReplacement(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context)=>AddGarageFormAAdmin())
-                          // );
-                          Navigator.push(
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context)=>AddGarageFormAAdmin())
                           );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context)=>AddGarageFormBAdmin())
+                          // );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context)=>UploadImage())
+                          // );
                         },
                         child: Row(
                           children: [
@@ -336,16 +342,16 @@ class _GarageListAdminState extends State<GarageListAdmin> {
                             ),
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('Garage ID')),
+                                label: Center(child: Text('Garage ID', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Garage Name')),
+                                label: Center(child: Text('Garage Name', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Status')),
+                                label: Center(child: Text('Status', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Action')),
+                                label: Center(child: Text('Action', style: TextStyle(color: Colors.white),)),
                               )
                             ],
                             rows: _filterGarages
@@ -399,11 +405,11 @@ class _GarageListAdminState extends State<GarageListAdmin> {
                                                               width: 200,
                                                               child: Column(
                                                                 children: [
-                                                                  Container(
-                                                                    height: 200,
-                                                                    width: 200,
-                                                                    child: Image.asset("assets/images/Questions-pana-1.png", width: 200, height: 200,),
-                                                                  ),
+                                                                  // Container(
+                                                                  //   height: 200,
+                                                                  //   width: 200,
+                                                                  //   child: Image.asset("assets/images/Questions-pana-1.png", width: 200, height: 200,),
+                                                                  // ),
                                                                   const Text("Do you want to deactive this ?", style: TextStyle(color: Colors.grey),)
                                                                 ],
                                                               ),
@@ -503,11 +509,11 @@ class _GarageListAdminState extends State<GarageListAdmin> {
                                                               width: 200,
                                                               child: Column(
                                                                 children: [
-                                                                  Container(
-                                                                    height: 200,
-                                                                    width: 200,
-                                                                    child: Image.asset("assets/images/Questions-pana-1.png", width: 200, height: 200,),
-                                                                  ),
+                                                                  // Container(
+                                                                  //   height: 200,
+                                                                  //   width: 200,
+                                                                  //   child: Image.asset("assets/images/Questions-pana-1.png", width: 200, height: 200,),
+                                                                  // ),
                                                                   const Text("Do you want to active this ?", style: TextStyle(color: Colors.grey),)
                                                                 ],
                                                               ),
@@ -608,11 +614,11 @@ class _GarageListAdminState extends State<GarageListAdmin> {
                                                               width: 200,
                                                               child: Column(
                                                                 children: [
-                                                                  Container(
-                                                                    height: 200,
-                                                                    width: 200,
-                                                                    child: Image.asset("assets/images/Questions-pana-1.png", width: 200, height: 200,),
-                                                                  ),
+                                                                  // Container(
+                                                                  //   height: 200,
+                                                                  //   width: 200,
+                                                                  //   child: Image.asset("assets/images/Questions-pana-1.png", width: 200, height: 200,),
+                                                                  // ),
                                                                   const Text("Do you want to delete this ?", style: TextStyle(color: Colors.grey),)
                                                                 ],
                                                               ),

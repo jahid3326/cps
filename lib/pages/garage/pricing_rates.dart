@@ -343,25 +343,25 @@ class _PricingRatesGarageState extends State<PricingRatesGarage> {
                             
                             columns: [
                               DataColumn(
-                                label: Center(child: Text('Garage Id')),
+                                label: Center(child: Text('Garage Id', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Start Date')),
+                                label: Center(child: Text('Start Date', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('End Date')),
+                                label: Center(child: Text('End Date', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Day')),
+                                label: Center(child: Text('Day', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Price')),
+                                label: Center(child: Text('Price', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Time')),
+                                label: Center(child: Text('Time', style: TextStyle(color: Colors.white),)),
                               ),
                               DataColumn(
-                                label: Center(child: Text('Action')),
+                                label: Center(child: Text('Action', style: TextStyle(color: Colors.white),)),
                               ),
                             ],
                             rows: _filterData

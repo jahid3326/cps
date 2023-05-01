@@ -213,7 +213,7 @@ class _NewCitiationGarageState extends State<NewCitiationGarage> {
             ..backgroundColor = Colors.green.shade200
             ..indicatorColor = Colors.green.shade900
             ..textColor = Colors.green.shade900;
-          EasyLoading.showSuccess('Add Success!');
+          EasyLoading.showSuccess('New citation added successfully');
           EasyLoading.dismiss();
         }else{
           EasyLoading.instance
@@ -401,7 +401,7 @@ class _NewCitiationGarageState extends State<NewCitiationGarage> {
                           child: 
                           Column(
                             children: [
-                              Text("Add Citiation", style: TextStyle(fontSize: 20, color: Colors.black54, fontWeight: FontWeight.bold),),
+                              Text("Add Citation", style: TextStyle(fontSize: 20, color: Colors.black54, fontWeight: FontWeight.bold),),
                               SizedBox(height: 5,),
                               Form(
                                 key: _formKey,
@@ -592,7 +592,7 @@ class _NewCitiationGarageState extends State<NewCitiationGarage> {
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                                           child: Text(
-                                            "Add Citiation".toUpperCase(),
+                                            "Submit".toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
